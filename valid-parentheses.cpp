@@ -42,11 +42,6 @@ public:
         parMap[']'] = '[';
         parMap['}'] = '{';
 
-        //Assigning a counting variable to each parenthasis type
-        int a = 0; //()
-        int b = 0; //[]
-        int c = 0; //{}
-
         //Iterating through the string and...
         stack<char> char_stack;
         for (char& symb : s) {
