@@ -1,19 +1,27 @@
 //Created: 2023-07-02 by VictorieeMan
 /* https://leetcode.com/problems/valid-parentheses/
-Runtime4 ms
+Runtime 0 ms
 Beats
-40.24%
+100%
 
-Memory6.2 MB
+Memory 6.4 MB
 Beats
-78.79%
+38.89%
+
+Changing map to unordered_map decreased time from 4ms to 0ms.
+Memory also increased, but that's probably random fluctuation;
+since the unordered_map actually needs less memory.
+
+Here are the stats for the map run:
+Runtime 4 ms, Beats 40.24%
+Memory 6.2 MB Beats 78.79%
 */
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <utility>
 #include <stack>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
 class Solution {
@@ -29,7 +37,7 @@ public:
         }
 
         //Using map to create quick and easy to read pairing check.
-        map<char,char> parMap;
+        unordered_map<char,char> parMap;
         parMap[')'] = '(';
         parMap[']'] = '[';
         parMap['}'] = '{';
