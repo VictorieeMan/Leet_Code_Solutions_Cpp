@@ -28,20 +28,28 @@ struct ListNode {
 
 class Solution {
 public:
+    //Function to append linked list.
+    static void addNode(ListNode* head, int x){
+        ListNode* newNode = new ListNode(x);
+        ListNode* current = head;
+        while (current->next != nullptr){
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        return nullptr;
+        ListNode* mergedHead;
+        ListNode* current_1 = list1;
+        ListNode* current_2 = list2;
+        do{
+
+
+        //Iterate until we have reached the end of both lists.
+        } while (current_1->next != nullptr && current_2->next != nullptr);
+        return mergedHead;
     }
 };
-
-//Funciton to append linked list.
-void addNode(ListNode* head, int x){
-    ListNode* newNode = new ListNode(x);
-    ListNode* current = head;
-    while (current->next != nullptr){
-        current = current->next;
-    }
-    current->next = newNode;
-}
 
 int main() {
     Solution sol;
@@ -56,8 +64,8 @@ int main() {
     //Using a function like this, avoids the need to stack and manually keep
     //track of how many levels of ->next are needed before adding a new node.
     ListNode* list2 = new ListNode(1);
-    addNode(list2, 2);
-    addNode(list2, 3);
+    sol.addNode(list2, 2);
+    sol.addNode(list2, 3);
 
     ListNode* mergedList = sol.mergeTwoLists(list1, list2);
 
