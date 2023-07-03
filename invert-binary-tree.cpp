@@ -65,16 +65,6 @@ public:
     }
 };
 
-void printTree(TreeNode* root){
-    if(!root){
-        //If empty tree
-        return;
-    }
-    cout << root->val << " ";
-    printTree(root->left);
-    printTree(root->right);
-}
-
 int main() {
     Solution sol;
     //Test cases
@@ -90,18 +80,20 @@ int main() {
     test2->left = new TreeNode(1);
     test2->right = new TreeNode(3);
 
-    //Test case 1
-    cout << "Test case 1:" << endl;
-    cout << "Expected: 4 7 2 9 6 3 1" << endl;
-    cout << "Output: ";
-    printTree(sol.invertTree(test1));
-    cout << endl;
+    //For the testing to work a function is needed to print the tree in order.
+    //root, left, right, l_l, l_r, r_l, r_r...
+    // //Test case 1
+    // cout << "Test case 1:" << endl;
+    // cout << "Expected: 4 7 2 9 6 3 1" << endl;
+    // cout << "Output: ";
+    // inorderTraversal(sol.invertTree(test1));
+    // cout << endl;
 
-    //Test case 2
-    cout << "Test case 2:" << endl;
-    cout << "Expected: 2 3 1" << endl;
-    cout << "Output: ";
-    printTree(sol.invertTree(test2));
-    cout << endl;
+    // //Test case 2
+    // cout << "Test case 2:" << endl;
+    // cout << "Expected: 2 3 1" << endl;
+    // cout << "Output: ";
+    // // printTree(sol.invertTree(test2));
+    // cout << endl;
     return 0;
 }
