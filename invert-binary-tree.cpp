@@ -1,5 +1,12 @@
 //Created: 2023-7-03 by VictorieeMan
 /* https://leetcode.com/problems/invert-binary-tree/
+Runtime 0 ms
+Beats
+100%
+
+Memory 10.2 MB
+Beats
+15.52%
 */
 #include <iostream>
 #include <vector>
@@ -18,12 +25,55 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// For debugging :)
+// void printTree(TreeNode* root){
+//     if(!root){
+//         //If empty tree
+//         return;
+//     }
+//     cout << root->val << " ";
+//     printTree(root->left);
+//     printTree(root->right);
+// }
+
 class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
-        return nullptr;
+        //Recursive function
+        if(!root){
+            //If empty tree
+            return nullptr;
+        }
+        TreeNode* invTree = new TreeNode(root->val);
+        if (!root->left && !root->right){
+            //If leaf node
+            return root;
+        } else if (!root->left){
+            //If only with right child
+            invTree->left = invertTree(root->right);
+            return invTree;
+        } else if (!root->right){
+            //If only with left child
+            invTree->right = invertTree(root->left);
+            return invTree;
+        } else{
+            //If with two children left & right
+            invTree->left = invertTree(root->right);
+            invTree->right = invertTree(root->left);
+            return invTree;
+        }
     }
 };
+
+void printTree(TreeNode* root){
+    if(!root){
+        //If empty tree
+        return;
+    }
+    cout << root->val << " ";
+    printTree(root->left);
+    printTree(root->right);
+}
 
 int main() {
     Solution sol;
@@ -44,14 +94,14 @@ int main() {
     cout << "Test case 1:" << endl;
     cout << "Expected: 4 7 2 9 6 3 1" << endl;
     cout << "Output: ";
-    sol.invertTree(test1);
+    printTree(sol.invertTree(test1));
     cout << endl;
 
     //Test case 2
     cout << "Test case 2:" << endl;
     cout << "Expected: 2 3 1" << endl;
     cout << "Output: ";
-    sol.invertTree(test2);
+    printTree(sol.invertTree(test2));
     cout << endl;
     return 0;
 }
