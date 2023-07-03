@@ -28,7 +28,7 @@ struct ListNode {
 
 class Solution {
 public:
-    //Function to append linked list.
+    //Function to append linked list, good for creating custom test input.
     static void addNode(ListNode* head, int x){
         ListNode* newNode = new ListNode(x);
         ListNode* current = head;
@@ -38,16 +38,71 @@ public:
         current->next = newNode;
     }
 
+    static bool check_if_list_have_items(ListNode* list){
+        if(list == nullptr){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode* mergedHead;
-        ListNode* current_1 = list1;
-        ListNode* current_2 = list2;
+        ListNode* mergedList;
+        
+        //Lists l1 and l2 are assumed empty on declaration.
+        bool l1_have_items = 0;
+        bool l2_have_items = 0;
+        //Checks if lists have items, are non empty
+        if(list1 != nullptr){
+            l1_have_items = 1;
+        }
+        if(list2 != nullptr){
+            l2_have_items = 1;
+        }
+        if(!l1_have_items && !l2_have_items){
+            //If both lists are empty
+            return nullptr;
+        }
+        if(l1_have_items && !l2_have_items){
+            //If list two is empty
+            return list1;
+        } else if(!l1_have_items && l2_have_items){
+            //If list one is empty
+            return list2;
+        }
+
+        //Otherwise start merging the lists
+        int val1 = list1->val;
+        int val2 = list2->val;
+        if(val1 < val2){
+                mergedList = new ListNode(val1);
+                list1 = list1->next;
+                l1_have_items = check_if_list_have_items(list1);
+            } else{
+                mergedList = new ListNode(val2);
+                list2 = list2->next;
+                l2_have_items = check_if_list_have_items(list2);
+            }
+
+        //Loop over the rest.
         do{
-
-
+            if(list1 != nullptr){
+                val1 = list1->val;
+            }
+            if(list2 != nullptr){
+                val2 = list2->val;
+            }
+            
+            if(val1 < val2){
+                addNode(mergedList,val1);
+                list1 = list1->next;
+            } else{
+                addNode(mergedList,val2);
+                list2 = list2->next;
+            }
         //Iterate until we have reached the end of both lists.
-        } while (current_1->next != nullptr && current_2->next != nullptr);
-        return mergedHead;
+        } while (list1 != nullptr || list2 != nullptr);
+        return mergedList;
     }
 };
 
@@ -64,8 +119,8 @@ int main() {
     //Using a function like this, avoids the need to stack and manually keep
     //track of how many levels of ->next are needed before adding a new node.
     ListNode* list2 = new ListNode(1);
-    sol.addNode(list2, 2);
     sol.addNode(list2, 3);
+    sol.addNode(list2, 4);
 
     ListNode* mergedList = sol.mergeTwoLists(list1, list2);
 
