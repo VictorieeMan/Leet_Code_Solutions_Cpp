@@ -1,5 +1,12 @@
 //Created: 2023- by VictorieeMan
 /* https://leetcode.com/problems/merge-two-sorted-lists/
+Runtime 8 ms
+Beats
+71.47%
+
+Memory 14.9 MB
+Beats
+10.89%
 */
 #include <iostream>
 #include <vector>
@@ -86,22 +93,32 @@ public:
 
         //Loop over the rest.
         do{
-            if(list1 != nullptr){
+            if(l1_have_items && l2_have_items){
+                //If both lists have items
                 val1 = list1->val;
-            }
-            if(list2 != nullptr){
                 val2 = list2->val;
-            }
-            
-            if(val1 < val2){
+                if(val1 < val2){
+                    addNode(mergedList,val1);
+                    list1 = list1->next;
+                } else{
+                    addNode(mergedList,val2);
+                    list2 = list2->next;
+                }
+            } else if(l1_have_items && !l2_have_items){
+                //If list2 is empty
+                val1 = list1->val;
                 addNode(mergedList,val1);
                 list1 = list1->next;
-            } else{
+            } else if(!l1_have_items && l2_have_items){
+                //If list1 is empty
+                val2 = list2->val;
                 addNode(mergedList,val2);
                 list2 = list2->next;
             }
+            l1_have_items = check_if_list_have_items(list1);
+            l2_have_items = check_if_list_have_items(list2);
         //Iterate until we have reached the end of both lists.
-        } while (list1 != nullptr || list2 != nullptr);
+        } while (l1_have_items || l2_have_items);
         return mergedList;
     }
 };
