@@ -5,6 +5,7 @@
         "map": "cpp",
         "iostream": "cpp",
         "algorithm": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "ostream": "cpp"
     }
 }
